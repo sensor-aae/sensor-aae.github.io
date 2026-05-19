@@ -740,7 +740,7 @@
         </a>
       </div>
       <div class="reveal reveal-delay-3">
-        <form onsubmit="handleSubmit(event)">
+
           <div class="form-group">
             <label for="name">Name <span style="color:var(--ink-3); font-weight:400;">(optional)</span></label>
             <input type="text" id="name" name="name" placeholder="Your name">
@@ -810,13 +810,32 @@
   const counter = document.getElementById('char-count');
   if (msg) msg.addEventListener('input', () => { counter.textContent = msg.value.length + ' / 500'; });
 
-  // Form submit placeholder
-  function handleSubmit(e) {
+  // Form submit — Formspree
+  async function handleSubmit(e) {
     e.preventDefault();
-    document.getElementById('form-success').style.display = 'block';
-    e.target.reset();
-    counter.textContent = '0 / 500';
-    setTimeout(() => { document.getElementById('form-success').style.display = 'none'; }, 4000);
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Sending…';
+    try {
+      const res = await fetch('https://formspree.io/f/xredeqyk', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+      if (res.ok) {
+        document.getElementById('form-success').style.display = 'block';
+        form.reset();
+        counter.textContent = '0 / 500';
+        setTimeout(() => { document.getElementById('form-success').style.display = 'none'; }, 5000);
+      } else {
+        alert('Something went wrong — please email me directly at amanda.eachiangia@gmail.com');
+      }
+    } catch {
+      alert('Network error — please email me directly at amanda.eachiangia@gmail.com');
+    }
+    btn.disabled = false;
+    btn.innerHTML = '<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg> Send Message';
   }
 </script>
 </body>
