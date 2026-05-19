@@ -1,1 +1,824 @@
-<h1>Hello World</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amanda Achiangia — Quantitative Finance & Model Risk</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F7F5F0;
+    --bg-card: #FFFFFF;
+    --bg-dark: #0E0E0E;
+    --ink: #0E0E0E;
+    --ink-2: #4A4843;
+    --ink-3: #8A8780;
+    --accent: #1A3A5C;
+    --accent-2: #2E6B9E;
+    --accent-light: #E8F0F8;
+    --gold: #C4963A;
+    --gold-light: #FBF3E3;
+    --border: rgba(14,14,14,0.10);
+    --border-strong: rgba(14,14,14,0.18);
+    --radius: 4px;
+    --radius-lg: 10px;
+    --font-display: 'DM Serif Display', Georgia, serif;
+    --font-body: 'Outfit', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --nav-h: 68px;
+    --max: 1080px;
+    --transition: 0.22s ease;
+  }
+
+  html { scroll-behavior: smooth; font-size: 16px; }
+
+  body {
+    font-family: var(--font-body);
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    height: var(--nav-h);
+    background: rgba(247,245,240,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+    display: flex; align-items: center;
+  }
+  .nav-inner {
+    max-width: var(--max); margin: 0 auto; padding: 0 2rem;
+    width: 100%; display: flex; justify-content: space-between; align-items: center;
+  }
+  .nav-name {
+    font-family: var(--font-display); font-size: 1.15rem;
+    color: var(--ink); text-decoration: none; letter-spacing: 0.01em;
+    transition: color var(--transition);
+  }
+  .nav-name:hover { color: var(--accent-2); }
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+  .nav-links a {
+    font-size: 0.8rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--ink-2); text-decoration: none; transition: color var(--transition);
+    position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -3px; left: 0; right: 0;
+    height: 1.5px; background: var(--accent-2);
+    transform: scaleX(0); transition: transform var(--transition); transform-origin: left;
+  }
+  .nav-links a:hover { color: var(--accent-2); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-links a.active { color: var(--accent); }
+  .nav-links a.active::after { transform: scaleX(1); background: var(--accent); }
+
+  /* ── SECTIONS ── */
+  section { padding: 7rem 2rem; }
+  section:first-of-type { padding-top: calc(var(--nav-h) + 5rem); }
+  .section-inner { max-width: var(--max); margin: 0 auto; }
+
+  .section-label {
+    font-family: var(--font-mono); font-size: 0.72rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent-2);
+    margin-bottom: 0.75rem; display: block;
+  }
+  h2.section-title {
+    font-family: var(--font-display); font-size: clamp(2rem, 4vw, 2.8rem);
+    font-weight: 400; color: var(--ink); line-height: 1.2; margin-bottom: 1rem;
+  }
+  .section-sub {
+    font-size: 1rem; color: var(--ink-2); max-width: 52ch; line-height: 1.7;
+    margin-bottom: 3.5rem;
+  }
+
+  /* ── HERO ── */
+  #home { background: var(--bg); min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+  .hero-eyebrow {
+    font-family: var(--font-mono); font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent-2);
+    margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 32px; height: 1.5px; background: var(--accent-2);
+  }
+  h1.hero-name {
+    font-family: var(--font-display); font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 400; line-height: 1.07; color: var(--ink);
+    margin-bottom: 0.4rem;
+  }
+  h1.hero-name em { font-style: italic; color: var(--accent-2); }
+  .hero-role {
+    font-family: var(--font-display); font-size: clamp(1.2rem, 2.8vw, 2rem);
+    font-weight: 400; font-style: italic; color: var(--ink-2); margin-bottom: 2rem;
+  }
+  .hero-desc {
+    font-size: 1rem; color: var(--ink-2); max-width: 52ch;
+    line-height: 1.75; margin-bottom: 2.5rem;
+  }
+  .hero-ctas { display: flex; flex-wrap: wrap; gap: 1rem; }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    font-family: var(--font-body); font-size: 0.82rem; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    padding: 0.7rem 1.5rem; border-radius: var(--radius);
+    text-decoration: none; cursor: pointer; border: none;
+    transition: all var(--transition);
+  }
+  .btn-primary {
+    background: var(--accent); color: #fff;
+  }
+  .btn-primary:hover { background: var(--accent-2); transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--ink);
+    border: 1px solid var(--border-strong);
+  }
+  .btn-outline:hover { border-color: var(--accent-2); color: var(--accent-2); transform: translateY(-1px); }
+
+  /* ── SKILLS STRIP ── */
+  .skills-strip {
+    border-top: 0.5px solid var(--border);
+    border-bottom: 0.5px solid var(--border);
+    padding: 3rem 0; margin-top: 5rem;
+    background: var(--bg-card);
+  }
+  .skills-strip-inner {
+    max-width: var(--max); margin: 0 auto; padding: 0 2rem;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem;
+  }
+  .skill-cat-label {
+    font-family: var(--font-mono); font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3);
+    margin-bottom: 0.75rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .skill-tag {
+    font-size: 0.78rem; font-weight: 400;
+    padding: 0.3rem 0.75rem;
+    border: 0.5px solid var(--border-strong);
+    border-radius: var(--radius);
+    color: var(--ink-2);
+    background: var(--bg);
+  }
+
+  /* ── FEATURED PROJECTS ── */
+  #home > .featured-wrapper {
+    background: var(--bg); padding: 5rem 2rem;
+  }
+  .featured-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5px;
+    border: 1.5px solid var(--border-strong); border-radius: var(--radius-lg);
+    overflow: hidden; background: var(--border-strong);
+  }
+  .featured-card {
+    background: var(--bg-card); padding: 2rem 1.75rem;
+    display: flex; flex-direction: column; gap: 0.75rem;
+    transition: background var(--transition);
+    text-decoration: none; color: inherit;
+  }
+  .featured-card:hover { background: var(--accent-light); }
+  .featured-num {
+    font-family: var(--font-mono); font-size: 0.7rem; color: var(--ink-3);
+    letter-spacing: 0.1em;
+  }
+  .featured-card h3 {
+    font-family: var(--font-display); font-size: 1.25rem; font-weight: 400;
+    color: var(--ink); line-height: 1.3;
+  }
+  .featured-card p {
+    font-size: 0.87rem; color: var(--ink-2); line-height: 1.65; flex: 1;
+  }
+  .featured-stack { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.5rem; }
+  .stack-pill {
+    font-family: var(--font-mono); font-size: 0.67rem; padding: 0.2rem 0.55rem;
+    background: var(--gold-light); color: var(--gold);
+    border: 0.5px solid rgba(196,150,58,0.25); border-radius: var(--radius);
+  }
+  .featured-arrow {
+    font-size: 0.78rem; font-weight: 500; color: var(--accent-2);
+    display: flex; align-items: center; gap: 0.35rem; margin-top: 0.5rem;
+    transition: gap var(--transition);
+  }
+  .featured-card:hover .featured-arrow { gap: 0.65rem; }
+
+  /* ── PROJECTS SECTION ── */
+  #projects { background: var(--bg-card); }
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 1px;
+    border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden;
+    background: var(--border);
+  }
+  .project-card {
+    background: var(--bg-card); padding: 1.75rem 1.5rem;
+    display: flex; flex-direction: column; gap: 0.65rem;
+    transition: background var(--transition);
+    text-decoration: none; color: inherit;
+  }
+  .project-card:hover { background: var(--accent-light); }
+  .project-top { display: flex; justify-content: space-between; align-items: flex-start; }
+  .domain-badge {
+    font-family: var(--font-mono); font-size: 0.65rem; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase; padding: 0.22rem 0.6rem;
+    border-radius: var(--radius);
+  }
+  .domain-quant { background: var(--accent-light); color: var(--accent); border: 0.5px solid rgba(26,58,92,0.2); }
+  .domain-ml    { background: #EDE9F8; color: #4A3A8C; border: 0.5px solid rgba(74,58,140,0.2); }
+  .domain-vol   { background: #E8F3E8; color: #2A6630; border: 0.5px solid rgba(42,102,48,0.2); }
+  .project-links { display: flex; gap: 0.75rem; }
+  .project-link {
+    font-size: 0.78rem; color: var(--ink-3); text-decoration: none;
+    display: flex; align-items: center; gap: 0.3rem;
+    transition: color var(--transition);
+  }
+  .project-link:hover { color: var(--accent-2); }
+  .project-card h3 {
+    font-family: var(--font-display); font-size: 1.1rem; font-weight: 400;
+    color: var(--ink); line-height: 1.3;
+  }
+  .project-card p {
+    font-size: 0.84rem; color: var(--ink-2); line-height: 1.65; flex: 1;
+  }
+
+  /* Compliance callout */
+  .compliance-strip {
+    margin-top: 3rem; padding: 1.25rem 1.5rem;
+    border: 0.5px solid rgba(196,150,58,0.35);
+    border-radius: var(--radius-lg); background: var(--gold-light);
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .compliance-strip svg { flex-shrink: 0; margin-top: 2px; }
+  .compliance-strip p { font-size: 0.84rem; color: #5A4010; line-height: 1.6; }
+  .compliance-strip strong { font-weight: 600; }
+
+  /* ── RESUME ── */
+  #resume { background: var(--bg); }
+  .resume-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .resume-dl-card {
+    border: 0.5px solid var(--border-strong); border-radius: var(--radius-lg);
+    padding: 2rem; background: var(--bg-card);
+    display: flex; flex-direction: column; gap: 1rem;
+  }
+  .resume-icon {
+    width: 48px; height: 48px; background: var(--accent-light);
+    border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center;
+  }
+  .resume-icon svg { color: var(--accent); }
+  .resume-dl-card h3 { font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; }
+  .resume-dl-card p { font-size: 0.87rem; color: var(--ink-2); line-height: 1.65; }
+  .link-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .link-card {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.1rem 1.25rem; border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg); background: var(--bg-card);
+    text-decoration: none; color: var(--ink);
+    transition: border-color var(--transition), transform var(--transition);
+  }
+  .link-card:hover { border-color: var(--accent-2); transform: translateX(3px); }
+  .link-card-icon {
+    width: 40px; height: 40px; border-radius: var(--radius);
+    background: var(--bg); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 1.1rem;
+  }
+  .link-card-text { display: flex; flex-direction: column; }
+  .link-card-title { font-weight: 500; font-size: 0.92rem; }
+  .link-card-sub { font-size: 0.8rem; color: var(--ink-3); }
+
+  /* ── ABOUT ── */
+  #about { background: var(--bg-card); }
+  .about-layout { display: grid; grid-template-columns: 1fr 2fr; gap: 4rem; align-items: start; }
+  .about-photo-placeholder {
+    aspect-ratio: 3/4; background: var(--bg);
+    border: 0.5px solid var(--border); border-radius: var(--radius-lg);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.75rem; color: var(--ink-3);
+  }
+  .about-photo-placeholder span { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.1em; text-align: center; }
+  .about-blocks { display: flex; flex-direction: column; gap: 2rem; }
+  .about-block h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; margin-bottom: 0.5rem; }
+  .about-block p { font-size: 0.92rem; color: var(--ink-2); line-height: 1.75; }
+  .about-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+    padding: 1.5rem; background: var(--bg); border-radius: var(--radius-lg);
+    border: 0.5px solid var(--border);
+  }
+  .about-stat-num {
+    font-family: var(--font-display); font-size: 2rem; font-weight: 400; color: var(--accent);
+  }
+  .about-stat-label { font-size: 0.75rem; color: var(--ink-3); margin-top: 0.1rem; }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--bg); }
+  .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .contact-info { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1rem 1.25rem; border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg); background: var(--bg-card);
+    text-decoration: none; color: var(--ink);
+    transition: border-color var(--transition);
+  }
+  .contact-item:hover { border-color: var(--accent-2); }
+  .contact-item-icon {
+    width: 38px; height: 38px; border-radius: var(--radius);
+    background: var(--accent-light); display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; color: var(--accent);
+  }
+  .contact-item-label { font-size: 0.72rem; color: var(--ink-3); }
+  .contact-item-val { font-size: 0.88rem; font-weight: 500; }
+
+  form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.8rem; font-weight: 500; color: var(--ink-2); }
+  .form-group input, .form-group textarea {
+    font-family: var(--font-body); font-size: 0.9rem;
+    padding: 0.7rem 1rem; border: 0.5px solid var(--border-strong);
+    border-radius: var(--radius); background: var(--bg-card); color: var(--ink);
+    transition: border-color var(--transition); outline: none; resize: none;
+  }
+  .form-group input:focus, .form-group textarea:focus { border-color: var(--accent-2); }
+  .form-note { font-size: 0.75rem; color: var(--ink-3); }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 0.5px solid var(--border); background: var(--bg-card);
+    padding: 2rem; display: flex; justify-content: center;
+  }
+  .footer-inner {
+    max-width: var(--max); width: 100%;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-copy { font-size: 0.78rem; color: var(--ink-3); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a {
+    font-size: 0.78rem; color: var(--ink-3); text-decoration: none;
+    transition: color var(--transition);
+  }
+  .footer-links a:hover { color: var(--accent-2); }
+
+  /* ── DIVIDER ── */
+  .rule { border: none; border-top: 0.5px solid var(--border); margin: 0; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .resume-layout, .about-layout, .contact-layout { grid-template-columns: 1fr; }
+    .about-stats { grid-template-columns: 1fr 1fr; }
+    .featured-grid { grid-template-columns: 1fr; background: var(--bg-card); }
+    .featured-card:not(:last-child) { border-bottom: 1.5px solid var(--border-strong); }
+    .projects-grid { grid-template-columns: 1fr; background: var(--bg-card); }
+    .project-card:not(:last-child) { border-bottom: 1px solid var(--border); }
+  }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="nav-name" href="#home">Amanda Achiangia</a>
+    <div class="nav-links">
+      <a href="#home" class="active" onclick="setActive(this)">Home</a>
+      <a href="#projects" onclick="setActive(this)">Projects</a>
+      <a href="#resume" onclick="setActive(this)">Resume</a>
+      <a href="#about" onclick="setActive(this)">About</a>
+      <a href="#contact" onclick="setActive(this)">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="section-inner">
+    <div class="hero-eyebrow">York University · Applied Mathematics (Financial Mathematics)</div>
+    <h1 class="hero-name">Amanda<br><em>Achiangia</em></h1>
+    <p class="hero-role">Quantitative Finance & Model Risk</p>
+    <p class="hero-desc">
+      Graduating Applied Mathematics student building institutional-grade models for
+      market risk analysis, model validation, and quantitative research. Targeting
+      model risk and quant roles at Canadian Big 6 banks and Big 4 consulting firms.
+    </p>
+    <div class="hero-ctas">
+      <a href="#" class="btn btn-primary" download="Amanda_Achiangia_Resume.pdf">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v10M7 15l5 5 5-5"/><path d="M5 20h14"/></svg>
+        Download Resume
+      </a>
+      <a href="#projects" class="btn btn-outline">
+        View Projects
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Skills Strip -->
+  <div class="skills-strip">
+    <div class="skills-strip-inner">
+      <div>
+        <div class="skill-cat-label">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">R</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">LaTeX</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-cat-label">Modeling</div>
+        <div class="skill-tags">
+          <span class="skill-tag">VaR / ES</span>
+          <span class="skill-tag">GARCH</span>
+          <span class="skill-tag">Monte Carlo</span>
+          <span class="skill-tag">Black-Scholes</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-cat-label">Frameworks</div>
+        <div class="skill-tags">
+          <span class="skill-tag">scipy</span>
+          <span class="skill-tag">NumPy</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">Streamlit</span>
+        </div>
+      </div>
+      <div>
+        <div class="skill-cat-label">Standards</div>
+        <div class="skill-tags">
+          <span class="skill-tag">SR 11-7</span>
+          <span class="skill-tag">OSFI E-23</span>
+          <span class="skill-tag">Backtesting</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Featured Projects -->
+  <div style="max-width: var(--max); margin: 4rem auto 0; padding: 0 2rem;">
+    <span class="section-label">Featured Work</span>
+    <div class="featured-grid">
+      <a class="featured-card" href="https://github.com/sensor-aae/Integrated-Risk-App" target="_blank" rel="noopener">
+        <span class="featured-num">01</span>
+        <h3>Integrated Risk Application</h3>
+        <p>Production-grade VaR/ES engine with GARCH(1,1) via MLE estimation, FHS simulation, Christoffersen (1998) backtesting — serial independence and joint conditional coverage tests aligned with SR 11-7 and OSFI E-23 documentation standards.</p>
+        <div class="featured-stack">
+          <span class="stack-pill">Python</span>
+          <span class="stack-pill">scipy</span>
+          <span class="stack-pill">Streamlit</span>
+          <span class="stack-pill">GARCH</span>
+          <span class="stack-pill">L-BFGS-B</span>
+        </div>
+        <div class="featured-arrow">
+          View on GitHub
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
+      </a>
+      <a class="featured-card" href="https://github.com/sensor-aae/Volatility-modeling" target="_blank" rel="noopener">
+        <span class="featured-num">02</span>
+        <h3>Volatility Modeling</h3>
+        <p>Comparative framework for volatility estimation methods — GARCH family, EWMA, and historical models — with explicit methodology cross-linking to the Integrated Risk App for coherent end-to-end model documentation.</p>
+        <div class="featured-stack">
+          <span class="stack-pill">Python</span>
+          <span class="stack-pill">GARCH</span>
+          <span class="stack-pill">EWMA</span>
+          <span class="stack-pill">Time Series</span>
+        </div>
+        <div class="featured-arrow">
+          View on GitHub
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
+      </a>
+      <a class="featured-card" href="https://github.com/sensor-aae/European-Option-Pricing" target="_blank" rel="noopener">
+        <span class="featured-num">03</span>
+        <h3>European Option Pricing</h3>
+        <p>Black-Scholes closed-form pricing with Greeks analysis across moneyness regimes — ITM, ATM, OTM — alongside Monte Carlo simulation benchmarks and sensitivity analysis for hedging strategy evaluation.</p>
+        <div class="featured-stack">
+          <span class="stack-pill">Python</span>
+          <span class="stack-pill">Black-Scholes</span>
+          <span class="stack-pill">Monte Carlo</span>
+          <span class="stack-pill">Greeks</span>
+        </div>
+        <div class="featured-arrow">
+          View on GitHub
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <span class="section-label reveal">All Projects</span>
+    <h2 class="section-title reveal reveal-delay-1">GitHub Portfolio</h2>
+    <p class="section-sub reveal reveal-delay-2">Quantitative finance and risk models built to institutional documentation standards — each project references primary literature and explicitly addresses model limitations.</p>
+
+    <div class="projects-grid reveal reveal-delay-3">
+
+      <a class="project-card" href="https://github.com/sensor-aae/Integrated-Risk-App" target="_blank" rel="noopener">
+        <div class="project-top">
+          <span class="domain-badge domain-quant">Market Risk</span>
+          <div class="project-links">
+            <span class="project-link">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </span>
+          </div>
+        </div>
+        <h3>Integrated Risk Application</h3>
+        <p>Production-grade portfolio risk engine: FHS VaR/ES with MLE-estimated GARCH(1,1), Christoffersen (1998) backtesting suite, component VaR decomposition, and stress-testing scenarios. Streamlit UI with pass/fail indicators aligned to SR 11-7 and OSFI E-23.</p>
+        <div class="featured-stack">
+          <span class="stack-pill">Python</span><span class="stack-pill">scipy</span><span class="stack-pill">Streamlit</span><span class="stack-pill">GARCH MLE</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/sensor-aae/Volatility-modeling" target="_blank" rel="noopener">
+        <div class="project-top">
+          <span class="domain-badge domain-vol">Volatility</span>
+          <div class="project-links">
+            <span class="project-link">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </span>
+          </div>
+        </div>
+        <h3>Volatility Modeling</h3>
+        <p>Systematic comparison of GARCH(1,1), EWMA, and historical volatility estimators. Methodology connection table cross-links findings directly to the Integrated Risk App — demonstrating how parameter choices flow through to VaR model performance.</p>
+        <div class="featured-stack">
+          <span class="stack-pill">Python</span><span class="stack-pill">GARCH</span><span class="stack-pill">EWMA</span><span class="stack-pill">Time Series</span>
+        </div>
+      </a>
+
+      <a class="project-card" href="https://github.com/sensor-aae/European-Option-Pricing" target="_blank" rel="noopener">
+        <div class="project-top">
+          <span class="domain-badge domain-quant">Derivatives</span>
+          <div class="project-links">
+            <span class="project-link">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+              GitHub
+            </span>
+          </div>
+        </div>
+        <h3>European Option Pricing</h3>
+        <p>Black-Scholes closed-form pricing with full Greeks — Delta, Gamma, Vega, Theta, Rho — across ITM/ATM/OTM moneyness regimes. Monte Carlo benchmarks validate analytical results; sensitivity analysis supports hedging strategy design.</p>
+        <div class="featured-stack">
+          <span class="stack-pill">Python</span><span class="stack-pill">Black-Scholes</span><span class="stack-pill">Monte Carlo</span><span class="stack-pill">Greeks</span>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="compliance-strip reveal" style="margin-top: 2rem;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#C4963A" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+      <p>All projects are documented to <strong>SR 11-7</strong> and <strong>OSFI E-23</strong> standards: READMEs reference primary literature, cite real validation outputs, and explicitly address resolved model limitations — the same bar used by model risk teams at major financial institutions.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESUME -->
+<section id="resume">
+  <div class="section-inner">
+    <span class="section-label reveal">Resume</span>
+    <h2 class="section-title reveal reveal-delay-1">Credentials & Links</h2>
+    <div class="resume-layout">
+      <div class="resume-dl-card reveal reveal-delay-2">
+        <div class="resume-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10,9 9,9 8,9"/></svg>
+        </div>
+        <h3>Amanda_Achiangia_Resume.pdf</h3>
+        <p>Education, coursework in financial mathematics, project highlights, and technical skills — maintained in sync with GitHub portfolio activity.</p>
+        <a href="#" class="btn btn-primary" style="align-self: flex-start;" download="Amanda_Achiangia_Resume.pdf">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v10M7 15l5 5 5-5"/><path d="M5 20h14"/></svg>
+          Download PDF
+        </a>
+        <p style="font-size:0.75rem; color: var(--ink-3); margin-top: -0.25rem;">Replace the href above with your hosted PDF URL before deploying.</p>
+      </div>
+      <div class="link-cards reveal reveal-delay-3">
+        <a class="link-card" href="https://github.com/sensor-aae" target="_blank" rel="noopener">
+          <div class="link-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </div>
+          <div class="link-card-text">
+            <span class="link-card-title">GitHub — sensor-aae</span>
+            <span class="link-card-sub">github.com/sensor-aae</span>
+          </div>
+        </a>
+        <a class="link-card" href="https://www.linkedin.com/in/amanda-a-602328284" target="_blank" rel="noopener">
+          <div class="link-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div class="link-card-text">
+            <span class="link-card-title">LinkedIn</span>
+            <span class="link-card-sub">linkedin.com/in/amanda-a-602328284</span>
+          </div>
+        </a>
+        <a class="link-card" href="mailto:amanda.eachiangia@gmail.com">
+          <div class="link-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="link-card-text">
+            <span class="link-card-title">Email</span>
+            <span class="link-card-sub">amanda.eachiangia@gmail.com</span>
+          </div>
+        </a>
+        <a class="link-card" href="https://leetcode.com/u/sensor-aae/" target="_blank" rel="noopener">
+          <div class="link-card-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 12h7M12 8.5v7"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+          </div>
+          <div class="link-card-text">
+            <span class="link-card-title">LeetCode — sensor-aae</span>
+            <span class="link-card-sub">leetcode.com/u/sensor-aae</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <span class="section-label reveal">About</span>
+    <h2 class="section-title reveal reveal-delay-1">Background</h2>
+    <div class="about-layout">
+      <div class="reveal reveal-delay-2">
+        <div class="about-photo-placeholder">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.35"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+          <span>Headshot<br>coming soon</span>
+        </div>
+      </div>
+      <div class="about-blocks reveal reveal-delay-3">
+        <div class="about-stats">
+          <div>
+            <div class="about-stat-num">4+</div>
+            <div class="about-stat-label">Years of study in Applied Mathematics</div>
+          </div>
+          <div>
+            <div class="about-stat-num">3</div>
+            <div class="about-stat-label">Core risk & quant repositories</div>
+          </div>
+          <div>
+            <div class="about-stat-num">2</div>
+            <div class="about-stat-label">Regulatory standards studied</div>
+          </div>
+        </div>
+
+        <div class="about-block">
+          <h3>Education & Focus</h3>
+          <p>Graduating from York University's Applied Mathematics program with a specialization in Financial Mathematics. Coursework spans stochastic processes, statistical inference, numerical methods, and computational finance — with deliberate emphasis on the gap between theoretical models and production-ready implementation.</p>
+        </div>
+
+        <div class="about-block">
+          <h3>What I Build</h3>
+          <p>Risk models that meet the documentation bar expected by model risk teams at Canadian financial institutions — validated against SR 11-7 and OSFI E-23 standards. Every project references primary literature (Christoffersen 1998, etc.), cites real numerical outputs, and explicitly closes documented limitations rather than merely adding features.</p>
+        </div>
+
+        <div class="about-block">
+          <h3>Target Roles</h3>
+          <p>Model risk analyst, market risk analyst, and quantitative analyst positions at Big 6 Canadian banks (RBC, TD, Scotiabank, BMO, CIBC, National Bank) and Big 4 consulting firms. The portfolio is designed to withstand scrutiny from model risk and quant hiring panels — not just pass a resume screen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <span class="section-label reveal">Contact</span>
+    <h2 class="section-title reveal reveal-delay-1">Get in Touch</h2>
+    <p class="section-sub reveal reveal-delay-2">Open to opportunities in model risk, market risk, and quantitative analysis. Feel free to reach out about roles, collaborations, or questions about the work.</p>
+    <div class="contact-layout">
+      <div class="contact-info reveal reveal-delay-2">
+        <a class="contact-item" href="mailto:amanda.eachiangia@gmail.com">
+          <div class="contact-item-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Email</div>
+            <div class="contact-item-val">amanda.eachiangia@gmail.com</div>
+          </div>
+        </a>
+        <a class="contact-item" href="https://github.com/sensor-aae" target="_blank" rel="noopener">
+          <div class="contact-item-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">GitHub</div>
+            <div class="contact-item-val">github.com/sensor-aae</div>
+          </div>
+        </a>
+        <a class="contact-item" href="https://www.linkedin.com/in/amanda-a-602328284" target="_blank" rel="noopener">
+          <div class="contact-item-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">LinkedIn</div>
+            <div class="contact-item-val">linkedin.com/in/amanda-a-602328284</div>
+          </div>
+        </a>
+        <a class="contact-item" href="https://leetcode.com/u/sensor-aae/" target="_blank" rel="noopener">
+          <div class="contact-item-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8.5 12h7M12 8.5v7"/><rect x="3" y="3" width="18" height="18" rx="3"/></svg>
+          </div>
+          <div>
+            <div class="contact-item-label">LeetCode</div>
+            <div class="contact-item-val">leetcode.com/u/sensor-aae</div>
+          </div>
+        </a>
+      </div>
+      <div class="reveal reveal-delay-3">
+        <form onsubmit="handleSubmit(event)">
+          <div class="form-group">
+            <label for="name">Name <span style="color:var(--ink-3); font-weight:400;">(optional)</span></label>
+            <input type="text" id="name" name="name" placeholder="Your name">
+          </div>
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input type="email" id="email" name="email" placeholder="amanda.eachiangia@gmail.com" required>
+          </div>
+          <div class="form-group">
+            <label for="message">Message *</label>
+            <textarea id="message" name="message" rows="5" placeholder="Your message..." required maxlength="500"></textarea>
+            <span class="form-note" id="char-count">0 / 500</span>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Send Message
+          </button>
+          <p id="form-success" style="display:none; color: #2A6630; font-size:0.85rem; margin-top:0.5rem;">Message sent — I'll be in touch soon.</p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <span class="footer-copy">© 2026 Amanda Achiangia</span>
+    <div class="footer-links">
+      <a href="https://github.com/sensor-aae" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://www.linkedin.com/in/amanda-a-602328284" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="https://leetcode.com/u/sensor-aae/" target="_blank" rel="noopener">LeetCode</a>
+      <a href="mailto:amanda.eachiangia@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll-spy nav
+  const sections = ['home','projects','resume','about','contact'];
+  const navLinks = document.querySelectorAll('.nav-links a');
+  function updateNav() {
+    let current = 'home';
+    sections.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 100) current = id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', updateNav, { passive: true });
+  function setActive(el) {
+    navLinks.forEach(a => a.classList.remove('active'));
+    el.classList.add('active');
+  }
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => observer.observe(el));
+
+  // Char counter
+  const msg = document.getElementById('message');
+  const counter = document.getElementById('char-count');
+  if (msg) msg.addEventListener('input', () => { counter.textContent = msg.value.length + ' / 500'; });
+
+  // Form submit placeholder
+  function handleSubmit(e) {
+    e.preventDefault();
+    document.getElementById('form-success').style.display = 'block';
+    e.target.reset();
+    counter.textContent = '0 / 500';
+    setTimeout(() => { document.getElementById('form-success').style.display = 'none'; }, 4000);
+  }
+</script>
+</body>
+</html>
